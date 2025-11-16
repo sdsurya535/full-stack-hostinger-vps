@@ -7,7 +7,7 @@ export default function HealthCheck() {
   useEffect(() => {
     const fetchHealth = async () => {
       try {
-        const response = await fetch("http://localhost:4000/health");
+        const response = await fetch("http://31.97.232.33:4000/health");
         const data = await response.json();
         setHealth(data);
       } catch (error) {
