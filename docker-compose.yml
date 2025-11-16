@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  server:
+    build: ./server
+    container_name: express-server
+    ports:
+      - "4000:4000"
+
+    environment:
+      - NODE_ENV=development
+    # volumes:
+    #   - ./server:/usr/src/app
+    #   - /usr/src/app/node_modules
+    networks:
+      - fullstack-network
+  client:
+    build: ./client
+    container_name: react-client
+    ports:
+      - "5173:3000"
+    environment:
+      - NODE_ENV=development
+    # volumes:
+    #   - ./client:/usr/src/app
+    #   - /usr/src/app/node_modules
+    depends_on:
+      - server
+    networks:
+      - fullstack-network
+
+    restart: unless-stopped
+
+networks:
+  fullstack-network:
+    driver: bridge
